@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Project usingdefaultlocations="1" version="7">
+<Python major="3" minor="7" patch="2" platformpython="" />
+<Application entrypoint="" isbundle="0" isconsole="0" ispyqt5="1" name="" script="main.py" syspath="">
+<Package name="lib">
+<PackageContent included="1" isdirectory="0" name="__init__.py" />
+<PackageContent included="1" isdirectory="0" name="main_rc.py" />
+<Exclude name="*.py" />
+<Exclude name="*.qml" />
+<Exclude name="*.sh" />
+<Exclude name="*.pdy" />
+<Exclude name="*.json" />
+<Exclude name="*.qrc" />
+<Exclude name="build-android-32" />
+<Exclude name="sysroot-android-32" />
+</Package>
+</Application>
+<PyQtModule name="QtWidgets" />
+<PyQtModule name="QtNetwork" />
+<PyQtModule name="QtAndroidExtras" />
+<PyQtModule name="QtSvg" />
+<PyQtModule name="QtQuick" />
+<PyQtModule name="QtQml" />
+<PyQtModule name="Qt" />
+<PyQtModule name="QtQuickWidgets" />
+<PyQtModule name="QtSensors" />
+<PyQtModule name="QtBluetooth" />
+<StdlibModule name="http.server" />
+<StdlibModule name="http" />
+<StdlibModule name="ssl" />
+<StdlibModule name="sysconfig" />
+<StdlibModule name="zlib" />
+<StdlibModule name="importlib.resources" />
+<StdlibModule name="os" />
+<StdlibModule name="marshal" />
+<StdlibModule name="imp" />
+<StdlibModule name="logging" />
+<StdlibModule name="logging.config" />
+<StdlibModule name="logging.handlers" />
+<StdlibModule name="contextlib" />
+<StdlibModule name="urllib" />
+<StdlibModule name="urllib.request" />
+<StdlibModule name="traceback" />
+<ExternalLib defines="" includepath="" libs="-lz" name="zlib" target="android" />
+</Project>
