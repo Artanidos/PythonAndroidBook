@@ -1,0 +1,10 @@
+Are you going to build a GUI app for Windows, Mac OS or Linux or even for Android or iOS using Python or are you just curious what's possible in your programming language of choice then this book is for you.
+This book covers the full process from installing over coding to deploying apps to the specific platforms using Python, Qt5, PyQt5 and Visual Studio Code.
+This book covers both the imperative approach using QtWigets and the declarative approach using QtQuick and QML.
+I will show you how to setup a Linux machine as development and deployment platform and an Android phone as deployment device.
+All apps described in this book should also work on the other above mentioned platform.
+
+Who This Book Is For
+If you are able to write basic Python code and you are interested in developing apps with user interfaces for multiple platforms in Python this book is right for you.
+This book does not assume that you are familiar with Qt.
+If you want, try out all of the examples in this book it would be a great benefit if you are also working on a Linux machine like me, but MacOS and Windows should also be ok if your are able to search for help in the internet for OS specific differences.
