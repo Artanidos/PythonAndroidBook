@@ -14,12 +14,12 @@
 
     <application android:hardwareAccelerated="true" 
         android:name="org.qtproject.qt5.android.bindings.QtApplication" 
-        android:label="Demo" 
+        android:label="DynPy" 
         android:theme="@style/AppTheme"
         android:icon="@drawable/icon">
         <activity android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation|mcc|mnc|density" 
             android:name="org.qtproject.qt5.android.bindings.QtActivity" 
-            android:label="Demo" 
+            android:label="DynPy" 
             android:screenOrientation="unspecified"
             android:theme="@style/AppTheme"
             android:launchMode="singleTop">            

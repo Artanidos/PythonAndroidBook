@@ -93,10 +93,11 @@ if build_sysroot:
         args.append('--verbose')
 
     args.append('sysroot.json')
-
+    print("run ", args)
     run(args)
 
-run(['pyqtdeploy-build', '--target', target, '--sysroot', sysroot_dir, '--build-dir', build_dir, 'demo.pdy'])
+print("running pyqtdeploy-build")
+run(['pyqtdeploy-build', '--target', target, '--sysroot', sysroot_dir, '--build-dir', build_dir, 'dynpy.pdy'])
 
 # copy the main.qml to a directory where androiddeployqt will find it to add required libraries based on the import statements
 cp = "cp " + os.path.join(dir_path, "view.qml") + " " + os.path.join(dir_path, build_dir)
@@ -112,4 +113,4 @@ run([make])
 run([make, 'INSTALL_ROOT=dynpy', 'install'])
 run([os.path.join(host_bin_dir, 'androiddeployqt'), '--gradle', '--input', 'android-libmain.so-deployment-settings.json', '--output', 'dynpy'])
 apk_dir = os.path.join(build_dir, 'dynpy', 'build', 'outputs', 'apk', 'debug')
-print("The pyqt-demo-debug.apk file can be found in the '{0}' directory.  Run adb to install it to a simulator.".format(apk_dir))
+print("The pyqt-dynpy-debug.apk file can be found in the '{0}' directory.  Run adb to install it to a simulator.".format(apk_dir))

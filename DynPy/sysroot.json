@@ -2,7 +2,7 @@
     "Description": "The sysroot for the DynPy application.",
 
     "android|macos|win#openssl": {
-        "android#source":   "openssl-1.0.2s.tar.gz",
+        "android#source":   "openssl-1.0.2r.tar.gz",
         "macos|win#source": "openssl-1.1.0j.tar.gz",
         "win#no_asm":       true
     },
@@ -61,6 +61,6 @@
                 "QtQml"
         ],
 
-        "source":                       "PyQt5_*-5.12.1.tar.gz"
+        "source":                       "PyQt5_*-5.12.tar.gz"
     }
 }
