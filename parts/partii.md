@@ -74,10 +74,12 @@ if __name__ == "__main__":
 import QtQuick 2.0
 import QtQuick.Controls 2.5
 
-ApplicationWindow {
+ApplicationWindow 
+{
     visible: true
 
-    Text {
+    Text 
+    {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
         text: "Hello World"
@@ -135,18 +137,21 @@ if __name__ == "__main__":
 ```qml
 import QtQuick 2.1
 
-Rectangle {
+Rectangle 
+{
     id: rectangle
     color: "red"
     width: 200
     height: 200
 
-    Text {
+    Text 
+    {
         id: text
         text: "This is QML code"
         font.pointSize: 14
         anchors.centerIn: parent
-        PropertyAnimation {
+        PropertyAnimation 
+        {
             id: animation
             target: text
             property: "rotation"
@@ -154,7 +159,8 @@ Rectangle {
             loops: Animation.Infinite
         }
     }
-    MouseArea {
+    MouseArea 
+    {
         anchors.fill: parent
         onClicked: animation.paused ? animation.resume() : animation.pause()
     }

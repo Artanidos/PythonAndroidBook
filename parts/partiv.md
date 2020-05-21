@@ -1,4 +1,5 @@
-#Deploying to Android
+#Part IV - Deploment
+##Deploying a dynamic app to Android
 
 Now we are going to build an APK (**A**ndroid **P**ac**k**age).
 Therefore we first have to install a few other components. 
@@ -66,10 +67,11 @@ You should change the paths in the following script to your needs.
 
 *Deploy/build.sh*  
 ```bash
-export ANDROID_NDK_ROOT=/home/art/Android/Sdk/ndk-bundle
+export ANDROID_NDK_ROOT=/media/art/data/Android/Sdk/ndk-bundle
 export ANDROID_NDK_PLATFORM=android-28
-export ANDROID_SDK_ROOT=/home/art/Android/Sdk
-python3.7 build.py --target android-32 --installed-qt-dir /home/art/Qt/5.12.3 --no-sysroot --verbose --source-dir ./external-sources
+export ANDROID_SDK_ROOT=/media/art/data/Android/Sdk
+pyrcc5 main.qrc -o lib/main_rc.py
+python3.7 build.py --target android-32 --installed-qt-dir /media/art/data/Qt/5.12.2 --no-sysroot --verbose --source-dir ./../../DeployAndroid/external-sources
 ```
 
 external-sources points to the directory for the just downloaded packages.  
@@ -127,18 +129,30 @@ After these changes we have to change the main.py as follows:
 *Deploy/main.py*  
 ```python
 import sys
+import os
 import lib.main_rc
 from PyQt5.QtGui import QGuiApplication
 from PyQt5.QtQml import QQmlApplicationEngine
 
-
 if __name__ == "__main__":
+    sys_argv = sys.argv
+    sys_argv += ['--style', 'material']
     app = QGuiApplication(sys.argv)
-    engine = QQmlApplicationEngine(":/view.qml")
-    if not engine.rootObjects():
-        sys.exit(-1)
+    view =  "/storage/emulated/0/view.qml"
+    if os.path.exists(view):
+        # we are trying to load the view dynamically from the root of the storage
+        engine = QQmlApplicationEngine(view)
+        if not engine.rootObjects():
+            sys.exit(-1)
+    else:
+        # if the attempt to load the local file fails, we load the fallback
+        engine = QQmlApplicationEngine(":/view.qml")
+        if not engine.rootObjects():
+            sys.exit(-1)
     sys.exit(app.exec())
 ```
+In this app we are looking for the file viem.qml, if it's stored on the mobile phone root.
+This file we will produce later. It can be edited on the phone, so you don't have to recompile the whole app over and over.
 
 With ```import lib.main_rc``` we add the resource file.   
 And with the double point in **:**/view.qml we will tell Qt to load this file from a resource.
@@ -214,18 +228,21 @@ This file hold all properties necessary to create a sysroot directory where some
 {
     "Description": "The sysroot for the DynPy application.",
 
-    "android|macos|win#openssl": {
+    "android|macos|win#openssl": 
+    {
         "android#source":   "openssl-1.0.2s.tar.gz",
         "macos|win#source": "openssl-1.1.0j.tar.gz",
         "win#no_asm":       true
     },
 
-    "linux|macos|win#zlib": {
+    "linux|macos|win#zlib": 
+    {
         "source":               "zlib-1.2.11.tar.gz",
         "static_msvc_runtime":  true
     },
 
-    "qt5": {
+    "qt5": 
+    {
         "android-32#qt_dir":        "android_armv7",
         "android-64#qt_dir":        "android_arm64_v8a",
 
@@ -252,18 +269,21 @@ This file hold all properties necessary to create a sysroot directory where some
         "static_msvc_runtime":      true
     },
 
-    "python": {
+    "python": 
+    {
         "build_host_from_source":   false,
         "build_target_from_source": true,
         "source":                   "Python-3.7.2.tar.xz"
     },
 
-    "sip": {
+    "sip": 
+    {
         "module_name":  "PyQt5.sip",
         "source":       "sip-4.19.15.tar.gz"
     },
 
-    "pyqt5": {
+    "pyqt5": 
+    {
         "android#disabled_features":    [
                 "PyQt_Desktop_OpenGL", "PyQt_Printer", "PyQt_PrintDialog",
                 "PyQt_PrintPreviewDialog", "PyQt_PrintPreviewWidget"
@@ -311,16 +331,38 @@ List of devices attached
 If your device is listed copy the string to the left and paste it into the terminal:  
 
 ```console
-user@machine:/path$ adb -s 5WH6R19329010194 install /home/art/Sourcecode/Python/Book/Deploy/build-android-32/dynpy/build/outputs/apk/debug/demo-debug.apk
+user@machine:/path$ adb -s 5WH6R19329010194 install /home/art/Sourcecode/Python/Book/Deploy/build-android-32/dynpy/build/outputs/apk/debug/dynpy-debug.apk
 ```
 
 Also copy the APK path which will be displayed after the build process has finished.
 
 I have put the whole command into the *deploy.sh* file to use it later.
 
-##Summary
+Now you can try to start the app. It should show up with the text DynPy in the middle.  
+Now you open the settings app on your phone and enable the storage for DynPy.  
+Then the app can open file here: */storage/emulated/0*, which emulates the root on the phone.  
+Now we are creating a new file with the name *view.qml* in this directory on your phone and restart the app.  
+```qml
+import QtQuick 2.5
+import QtQuick.Controls 2.0
 
-Hopefully we have deployed the demo app to our device. 
+ApplicationWindow 
+{
+    visible: true
+
+    Text 
+    {
+        anchors.centerIn: parent
+        text: "DynPy"
+    }
+}
+```
+If everything went well, the app shall now display "DynPy".  
+
+This was you are able to develop the app further directly on the phone, without the need to recompile everything.  
+
+##Summary
+Hopefully we have deployed the DynPy app to our device. 
 To find out how to build and deploy to Android took me several days.   
 If you are running into trouble here don't hesitate to contact me.   
 Maybe I can help you out and publish our experience into the next version of this book so that other people are not running into trouble.

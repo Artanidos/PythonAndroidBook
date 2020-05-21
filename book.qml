@@ -26,10 +26,6 @@ Ebook {
         name: "Part IV"
     }
     Part {
-        src: "partv.md"
-        name: "Part V"
-    }
-    Part {
         src: "end.md"
         name: "End"
     }
