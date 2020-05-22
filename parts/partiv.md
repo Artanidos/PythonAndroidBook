@@ -105,7 +105,7 @@ os.chdir(build_dir)
 It is necessary that the androiddeployqt app will find a QML file in this directory. It scans all needed QML files for import statements to include the needed shared libraries into the APK.   
 androiddeployqt will be called by pyqtdeploy.  
 
-You can find the complete build.py and all other source files in the github repo: [https://github.com/Artanidos/DevAndroidPythonBook](https://github.com/Artanidos/DevAndroidPythonBook)  
+You can find the complete build.py and all other source files in the github repo: [https://github.com/Artanidos/PythonAndroidBook](https://github.com/Artanidos/PythonAndroidBook)  
 
 With the ANDROID*PACKAGE*SOURCE_DIR we specify that we have got Android specific files like the *AndroidManifest.xml* and the icons in this specific folder.   
 Also an app theme is included there. This theme only has one important thing *Theme.DeviceDefault.Light.NoActionBar*.
@@ -359,7 +359,7 @@ ApplicationWindow
 ```
 If everything went well, the app shall now display "DynPy".  
 
-This was you are able to develop the app further directly on the phone, without the need to recompile everything.  
+This was you are able to develop the app further directly on the phone, without the need to recompile everything. You might use PyDroid or even Markdown an editor for MD files.  
 
 ##Summary
 Hopefully we have deployed the DynPy app to our device. 

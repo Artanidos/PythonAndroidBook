@@ -12,3 +12,7 @@ If you want, try out all of the examples in this book it would be a great benefi
 If you already read my book Python GUI - Develop Cross Platform GUI Applications using Python, Qt 
 and PyQt5 you might only see that one chapter differences to this book along some other enhancements.
 I used a few chapters of that book and I only added one chapter about QML applications and therefore I have dropped the Desktop part.
+
+Special Bonus
+This books contains the app DynPy.
+After deploying the DynPy app you are able to continue develop your app on the phone without the need to recompile.

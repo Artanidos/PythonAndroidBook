@@ -4,11 +4,13 @@
 The QML syntax has been invented to declare user interfaces with an easy to read and easy to write new syntax, based on the ideas of XAML, Json and Javascript.  
 It combines the best of all of these languages.
 
-In QML the userinterface is declared as a hirachy tree. Each item is positioned inside another item. The events triggert by a control, when teh user clicks a button for example, can be coded in a javascript like language.  
+In QML the userinterface is declared as a hierachy tree. Each item is positioned inside another item. The events triggert by a control, when the user clicks a button for example, can be coded in a Javascript like language.  
 
 To declare the item tree we use the item name followed by an open bracket and a close bracket.
 ```qml
-Rectangle { }
+Rectangle 
+{ 
+}
 ```
 
 To set the value of a property you write the name of the property followed by a colon ":" and then the value.  
@@ -19,9 +21,10 @@ To declare numeric value you just put the numeric digit behind the colon.
 ```qml
 width: 200
 ```
-If you have got a text, then the value if put between quotations marks. **"** or **'**.
+If you have got a text, then the value is put between quotations marks. **"** or **'**.
 ```qml
 text: "The quick brown fox"
+message: 'Hello "Brother"'
 ```
 If you are using colors you put them also between quotation marks, leaded by a hash.  
 ```qml
@@ -29,20 +32,13 @@ color: "#FF00FF"
 ```
 Here the red part of the color is set to hex FF (255). Green is set to 0 and blue is set to FF (255).  
 
-You can also set the opacity using an additional hex value.
+You can also set the opacity using an additional hex value at the end of the string.
 ```qml
 color: "#FF00FFEE"
 ```
 Here the opacity has been set to EE (238).  
- 
-It is also possible to bind values of items to values of other items using javascript.
-```qml
-text: "The parent is " + parent.width + " pixels wide"
-```
-Lets assume the parent is the application window which I have set to a width of 350 pixels, then the text will say: The parent is 350 pixels wide  
-If I would resize the window then this value is updated with every mousemove event to show the new width.
 
-### Id
+### The Id
 A special value in QML is called id.  
 ```qml
 ApplicationWindow 
@@ -78,11 +74,24 @@ Rectangle
 ### Comments
 Comments can be made using // for a single line or /* */ for multiple lines, just like in C, C++ and Javascript.  
 
+```qml
+ApplicationWindow
+{
+    /* This
+    ** is a
+    ** comment.
+    */
+    visible: true
+
+    // This is also a comment
+}
+```
+
 Elements can be nested. So a parent element can have multiple child elements.  
 
 ### Import Statements
-    import Namespace VersionMajor.VersionMinor
-    import Namespace VersionMajor.VersionMinor as SingletonIdentifier
+    import Namespace Major.Minor
+    import Namespace Major.Minor as SingletonIdentifier
     import "directory"
     import "file.js" as ScriptIdentifier
 
@@ -99,14 +108,27 @@ You can declare properties using the property qualifier followed by the type, th
 property int clickCount: 0
 ```
 
-Another possibilty is to use the alias keyword to forward a property of an object or the object itself to the outer scope. The syntax is ```property alias <name>: <reference>```
+Another possibility is to use the alias keyword to forward a property of an object or the object itself to the outer scope. The syntax is ```property alias <name>: <reference>```
 ```qml
 property alias text: lable.text
 ``` 
-A property alias does not need a type. It used the type of the referenced property.   
+A property alias does not need a type. It used the type of the referenced property. 
+
+## Basic Types
+| Type | Description |
+|  :---     |   :---:     |
+| bool | Binary true/false value |
+| double | Number with a decimal point, stored in double precision |
+| enumeration | Named enumeration value |
+| int | Whole number, e.g. 0, 11, or -22 |
+| list | List of QML objects |
+| real | Number with a decimal point |
+| string | Free form text string |
+| url | Resource locator |
+| var | Generic property type |  
 
 ## Property Binding
-One of the most importand features of QML is the property binding. A value of a property can be set via a constant, an expression or via binding to another property.  
+One of the most important features of QML is the property binding. A value of a property can be set via a constant, an expression or via binding to another property.  
 
 ```qml
 Rectangle 
@@ -125,7 +147,8 @@ In the above case the height has been bound to the height of the parent object. 
 
 ## Signals
 ### Receiving signals and signal handlers
-To receive a notification when a signal is emitted for an object, the object definition should declare a signal handler named on<Signal>, where Signal is the name of the signal, with the first letter capitalized. The signal handler should contain the JavaScript code to be executed when the signal handler is invoked.  
+To receive a notification when a signal is emitted for an object, the object definition should declare a signal handler named ```on<Signal>```
+, where Signal is the name of the signal, with the first letter capitalized. The signal handler should contain the JavaScript code to be executed when the signal handler is invoked.  
 ```qml
     Button 
     {
@@ -140,10 +163,11 @@ To receive a notification when a signal is emitted for an object, the object def
         }
     }
 ```
-In the above case the Button has got a signal with the name clicked and we create a signal handler with the corresponding name onClicked.  
+In the above case the Button has got a signal with the name **clicked** and we create a signal handler with the corresponding name **onClicked**.  
 
 ### Property change signal handlers
-A signal is emitted when the value of a QML property changes. This type of signal is a property change signal and signal handlers for these signals are written in the form on<PropertyName>Changed, where PropertyName is the name of the property, with the first letter capitalized.   
+A signal is emitted when the value of a QML property changes. This type of signal is a property change signal and signal handlers for these signals are written in the form ```on<PropertyName>Changed
+```, where PropertyName is the name of the property, with the first letter capitalized.   
 ```qml
     Rectangle 
     {
@@ -157,11 +181,17 @@ A signal is emitted when the value of a QML property changes. This type of signa
         }
     }
 ```
-For example, the TapHandler of a Rectangle has got a pressed property. To receive a notification whenever this property changes, write a signal handler named onPressedChanged like in the above sample.  
+For example, the TapHandler of a Rectangle has got a **pressed** property. To receive a notification whenever this property changes, write a signal handler named ```onPressedChanged
+``` like in the above sample.  
 
 ### Connections
 In some cases we want to access a signal outside of an object. Therefore we use the Connections type.  
 ```qml
+    Button
+    {
+        id: button
+    }
+
     Connections 
     {
         target: button
@@ -175,16 +205,20 @@ In some cases we want to access a signal outside of an object. Therefore we use 
 ### Attached signal handlers
 An attached signal handler receives a signal from an attached type.  
 ```qml
+ApplicationWindow
+{
     Component.onCompleted: 
     {
         console.log("The windows title is", title)
     }
+}
 ```
-In the above case the onCompleted event is fired, when the ApplicationWindow has been loaded.  
+In the above case the onCompleted event is fired, when the ApplicationWindow has been loaded completely.  
  
 ### Signals for a custom QML type  
 The syntax for defining a new signal is:  
-signal <name>[([<type> <parameter name>[, ...]])]  
+```signal <name>[([<type> <parameter name>[, ...]])]```
+
 A signal is emitted by invoking the signal as a method.  
 ```qml
 // SquareButton.qml
@@ -219,16 +253,12 @@ To use this signal you declare an onActivated handler in the code that uses the 
     }
 ```
 ##Functions
-To declare a JavaScript function you are using the folowing syntax 
+To declare a JavaScript function you are using the following syntax 
 ```
 function <name> ( <parameters> ) { ... }
 ```
 In the next sample we have got the Text with the id txt.
-In the same parent we have go a MouseArea which is used just a get a click event when the user click in it with the mouse or when the user touches this area on a mobile.
-```qml
-anchor.fill: parent
-```   
-This gives the MouseArea the same size and position as the parent.   
+In the same parent we have go a MouseArea which is used just a get a click event when the user click in it with the mouse or when the user touches this area on a mobile.  
 
 ```qml
 property int clickCount: 0
@@ -349,7 +379,7 @@ self._root.updateMessage(value + " from Python")
 
 ## Screen size 
 To place items on the surface we have to position them.  
-When you are comming from a windows environment like WinForms, then you know how to position item using their x and y coordinates.  
+When you are comming from a windows environment like WinForms, then you know how to position items using their x and y coordinates.  
 This was fine for windows, where the screensize was kind of known back in the years.  
 We only had screen sizes like 640 x 480 or 1024 x 768. Where you tried to support the smallest screen resolution when designing a dialog.  
 On a mobil phone we have hundreds of different screen resolutions and form factors, so we have to change our thinking how to design a dialog.  
@@ -556,6 +586,10 @@ In the view we just have to change the model.
 model: mymodel
 ```
 The model object has now been set as a context property.  
+
+For additional control please refer the Qt documentations and samples.  
+[All QML Types](https://doc.qt.io/qt-5/qmltypes.html)
+
 
 ## Summary
 We have seen the basics of QML. We are now able to create simple apps using QML and Python.  

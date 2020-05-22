@@ -14,7 +14,7 @@ Then I learned about generators, comprehension and meta programming and Python g
 
 Btw...to be able to write this book I wrote an application called EbookCreator. This app is also using PyQt5, QtWigets and I am using QML to serialize book projects, it is open source and you may have a look at the source code for inspiration. You are able to find the <a href="https://github.com/Artanidos/EbookCreator/">sources</a> on github.
 
-Yesterday I have seen a video with "Uncle" Bob Martin about programming in the future. He says that every 5 years the count of software developers on this planet double. That means that there are at least 50% of all developers that are inexperienced. 
+When I wrote my first book about Python, I have seen a video with "Uncle" Bob Martin about programming in the future. He says that every 5 years the count of software developers on this planet double. That means that there are at least 50% of all developers that are inexperienced. 
 He also said that we as a mature developer are responsible when for example a self driving car is killing other people because of software errors. That heard today I started to teach other developers and I am starting with this book.
 
 ##Who This Book Is For
@@ -24,7 +24,12 @@ If you want, try out all of the examples in this book it would be a great benefi
 
 ##Who This Book Is Not For
 If you are new to Python and programming you should consider reading beginner books for Python and watch tutorials on Youtube before continuing to read this book. 
-I am not going into Python specific details in this book. 
+I am not going into Python specific details in this book.  
+This is a NO-BUDGET project and I am not a native english speaker.  
+So if you like to complain about type errors or grammar you will like my book.  
+```
+// irony off
+```
 
 ##How This Book Is Organized
 Here are the main topics in each part of the book. 
