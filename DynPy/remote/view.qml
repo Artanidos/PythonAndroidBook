@@ -5,7 +5,7 @@ ApplicationWindow {
     visible: true
 
     Text {
-        anchors.centerIn: parent
-        text: "DynPy remote"
+        anchors.centerIn: paren
+        text: "DynPy remote 2"
     }
 }
