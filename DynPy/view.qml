@@ -7,10 +7,12 @@ import QtQuick.Controls.Material 2.1
 import QtQuick.Layouts 1.0
 import QtMultimedia 5.4
 
-ApplicationWindow {
+ApplicationWindow 
+{
     visible: true
 
-    Text {
+    Text 
+    {
         anchors.centerIn: parent
         text: "DynPy"
     }
