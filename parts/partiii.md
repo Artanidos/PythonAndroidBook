@@ -70,6 +70,7 @@ Rectangle
     }
 }
 ```
+Elements can be nested. So a parent element can have multiple child elements.  
 
 ### Comments
 Comments can be made using // for a single line or /* */ for multiple lines, just like in C, C++ and Javascript.  
@@ -86,8 +87,6 @@ ApplicationWindow
     // This is also a comment
 }
 ```
-
-Elements can be nested. So a parent element can have multiple child elements.  
 
 ### Import Statements
     import Namespace Major.Minor
